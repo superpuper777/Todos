@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+* {
+  font-family: 'PT Sans', sans-serif;
+  font-size: large;
+  box-sizing: border-box;
+  /* background-color: lightgrey; */
+  width: 35em;
+  margin: 0 auto;
+}

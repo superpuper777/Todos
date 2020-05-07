@@ -1,0 +1,18 @@
+<div class="todoapp">
+  
+  <app-todo-new (add)="onAddTodo($event)"></app-todo-new>
+
+  <app-todos
+  [todos]="todos"
+  (toggleComplete)="onToggleTodoComplete($event)"
+  (remove)="onRemoveTodo($event)"
+  ></app-todos>
+  
+  <app-todo-counter
+  [todos]="todos"
+  ></app-todo-counter>
+</div>
+
+
+
+

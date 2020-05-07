@@ -1,0 +1,33 @@
+.main {
+  position: relative;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 30em;
+  padding-right: 30px;
+}
+
+ul li {
+  list-style: none;
+  align-self: start;
+  padding-bottom: 1em;
+}
+
+input {
+  float: left;
+  cursor: pointer;
+}
+
+
+label {
+  padding: 4em;
+}
+
+button {
+  float: right;
+  width: 2em;
+  height: 2em;
+  border-radius: 5px;
+  background-color: lightgrey;
+  cursor: pointer;
+}

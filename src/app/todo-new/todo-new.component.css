@@ -1,0 +1,17 @@
+h1 {
+  text-align: center;
+}
+
+.new-todo {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 28em;
+  height: 2em;
+  border: 3px solid #9E9E9E;
+  color: #000000;
+  padding: 3px;
+  font-size: large;
+  background: #FFF;
+  border-radius: 5px;
+}
