@@ -7,7 +7,7 @@ import { Todo } from '.././todo';
   styleUrls: ['./todo-new.component.css'],
 })
 export class TodoNewComponent implements OnInit {
-  newTodo: Todo = new Todo();
+  title: string = '';
 
   @Output() add: EventEmitter<Todo> = new EventEmitter();
   constructor() {}
@@ -15,6 +15,7 @@ export class TodoNewComponent implements OnInit {
   ngOnInit(): void {}
 
   addTodo() {
-    this.add.emit(this.newTodo);
+    this.add.emit(new Todo(this.title));
+    this.title = '';
   }
 }

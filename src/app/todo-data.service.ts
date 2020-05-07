@@ -6,17 +6,12 @@ import { TODOS } from './mock-todos';
   providedIn: 'root',
 })
 export class TodoDataService {
-  lastId: number = 0;
-
   todos: Todo[] = TODOS;
 
   constructor() {}
 
   // Simulate POST /todos
   addTodo(todo: Todo): TodoDataService {
-    if (!todo.id) {
-      todo.id = ++this.lastId;
-    }
     this.todos.unshift(todo);
     return this;
   }
