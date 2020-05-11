@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { TodoDataService } from './../todo-data.service';
 
 import { TODOS } from './../mock-todos';
 import { Todo } from './../todo';
@@ -9,20 +10,29 @@ import { Todo } from './../todo';
   styleUrls: ['./todos.component.css'],
 })
 export class TodosComponent implements OnInit {
+  selectedTodo: Todo;
   @Input() todos: Todo[] = TODOS;
 
   @Output() remove: EventEmitter<Todo> = new EventEmitter();
 
   @Output() toggleComplete: EventEmitter<Todo> = new EventEmitter();
-  constructor() {}
+  constructor(private todoDataService: TodoDataService) {}
 
   ngOnInit(): void {}
 
-  onToggleTodoComplete(todo: Todo) {
+  onSelect(todo: Todo): void {
+    this.selectedTodo = todo;
+  }
+
+  onEditTodo(todo: Todo): void {
+    this.todoDataService.updateTodo(todo);
+  }
+
+  onToggleTodoComplete(todo: Todo): void {
     this.toggleComplete.emit(todo);
   }
 
-  onRemoveTodo(todo: Todo) {
+  onRemoveTodo(todo: Todo): void {
     this.remove.emit(todo);
   }
 }

@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { TodoNewComponent } from './todo-new/todo-new.component';
 import { TodosComponent } from './todos/todos.component';
 import { TodoCounterComponent } from './todo-counter/todo-counter.component';
+import { TodoEditorComponent } from './todo-editor/todo-editor.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TodoCounterComponent } from './todo-counter/todo-counter.component';
     TodoNewComponent,
     TodosComponent,
     TodoCounterComponent,
+    TodoEditorComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [TodoDataService],

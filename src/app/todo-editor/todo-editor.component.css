@@ -1,0 +1,14 @@
+.editor__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.edit-todo {
+  min-width: 240px;
+  height: 34px;
+  font-size: medium;
+  border: 2px solid #9E9E9E;
+  border-radius: 5px;
+}

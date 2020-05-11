@@ -7,10 +7,32 @@
   padding-right: 30px;
 }
 
+.view {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.view__label {
+  display: block;
+  width: 300px;
+}
+
 ul li {
   list-style: none;
-  align-self: start;
-  padding-bottom: 1em;
+  align-self: center;
+  padding: .5em;
+}
+
+li.selected {
+  background-color: #CFD8DC;
+  color: white;
+}
+
+li.selected:hover {
+  background-color: #BBD8DC;
+  color: white;
 }
 
 input {
@@ -20,7 +42,7 @@ input {
 
 
 label {
-  padding: 4em;
+  cursor: pointer;
 }
 
 button {

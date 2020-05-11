@@ -23,12 +23,13 @@ export class TodoDataService {
   }
 
   // Simulate PUT /todos/:id
-  updateTodoById(todo: Todo): Todo {
+  updateTodo(todo: Todo): Todo {
     let todoModel = this.getTodoById(todo.id);
-    //if (!todoModel) {
-    //return null;
-    //   }
-    todoModel.complete = todo.complete;
+    // //if (!todoModel) {
+    // //return null;
+    // //   }
+    // todoModel.title = todo.title;
+    // todoModel.complete = todo.complete;
     return todoModel;
   }
 
@@ -44,6 +45,6 @@ export class TodoDataService {
 
   // Toggle todo complete
   toggleTodoComplete(todo: Todo) {
-    return this.updateTodoById(todo);
+    return this.updateTodo(todo);
   }
 }
