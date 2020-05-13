@@ -1,17 +1,20 @@
 .main {
   position: relative;
   display: block;
-  margin-right: auto;
-  margin-left: auto;
-  width: 30em;
-  padding-right: 30px;
+  margin: 0 auto;
+  width: 28em;
+  padding-right: 40px;
+  box-shadow: -1px 7px 17px -1px rgba(0, 0, 0, 0.76);
+  border-radius: 10px;
 }
 
 .view {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .view__label {
@@ -30,26 +33,33 @@ li.selected {
   color: white;
 }
 
+li.selected .destroy {
+  background-color: rgb(141, 140, 140);
+  color: white;
+}
+
 li.selected:hover {
   background-color: #BBD8DC;
   color: white;
 }
 
-input {
-  float: left;
+.toggle {
+  height: 30px;
+  width: 30px;
+}
+
+.view__label {
   cursor: pointer;
 }
 
-
-label {
-  cursor: pointer;
-}
-
-button {
-  float: right;
-  width: 2em;
-  height: 2em;
+.destroy {
   border-radius: 5px;
-  background-color: lightgrey;
+  background-color: #CFD8DC;
   cursor: pointer;
+  font-size: small;
+}
+
+.destroy:hover,
+.destroy:focus {
+  background-color: rgb(163, 154, 154);
 }

@@ -4,7 +4,7 @@
       <div class="view">
         <input class="toggle" type="checkbox" (click)="onToggleTodoComplete(todo)" [checked]="todo.complete">
         <label class="view__label">{{todo.title}}</label>
-        <button class="destroy" (click)="onRemoveTodo(todo)">&#10006;</button>
+        <button class="destroy" (click)="onRemoveTodo(todo)">delete</button>
       </div>
     </li>
     <div *ngIf="selectedTodo">

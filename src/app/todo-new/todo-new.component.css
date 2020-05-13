@@ -3,14 +3,12 @@ h1 {
 }
 
 .new-todo {
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  width: 28em;
+  margin: 0 auto;
+  width: 25em;
   height: 2em;
+  display: block;
   border: 3px solid #9E9E9E;
   color: #000000;
-  padding: 3px;
   font-size: large;
   background: #FFF;
   border-radius: 5px;
