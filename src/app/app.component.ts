@@ -9,6 +9,7 @@ import { Todo } from './todo';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  completeTodos: number;
   constructor(private todoDataService: TodoDataService) {}
 
   onAddTodo(todo: Todo) {

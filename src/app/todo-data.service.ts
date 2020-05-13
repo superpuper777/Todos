@@ -7,6 +7,7 @@ import { TODOS } from './mock-todos';
 })
 export class TodoDataService {
   todos: Todo[] = TODOS;
+  public CompletedCount;
 
   constructor() {}
 
@@ -24,13 +25,7 @@ export class TodoDataService {
 
   // Simulate PUT /todos/:id
   updateTodo(todo: Todo): Todo {
-    let todoModel = this.getTodoById(todo.id);
-    // //if (!todoModel) {
-    // //return null;
-    // //   }
-    // todoModel.title = todo.title;
-    // todoModel.complete = todo.complete;
-    return todoModel;
+    return this.getTodoById(todo.id);
   }
 
   // Simulate GET /todos
@@ -38,6 +33,11 @@ export class TodoDataService {
     return this.todos;
   }
 
+  getAllCompleteTodos(): number {
+    let CompletedCount = this.todos.filter((todo) => todo.complete === false)
+      .length;
+    return CompletedCount;
+  }
   // Simulate GET /todos/:id
   getTodoById(id: number): Todo {
     return this.todos.find((todo) => todo.id === id);
