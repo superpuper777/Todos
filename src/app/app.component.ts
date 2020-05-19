@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { TodoDataService } from './todo-data.service';
 
 import { Todo } from './todo';
@@ -9,22 +9,34 @@ import { Todo } from './todo';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  todos: Todo[];
   completeTodos: number;
   constructor(private todoDataService: TodoDataService) {}
 
+  ngOnInit(): void {
+    this.getTodos();
+  }
+
   onAddTodo(todo: Todo) {
-    this.todoDataService.addTodo(todo);
+    return this.todoDataService.addTodo(todo).subscribe((todo) => {
+      this.todos.unshift(todo);
+    });
   }
 
   onToggleTodoComplete(todo: Todo) {
-    this.todoDataService.toggleTodoComplete(todo);
+    this.todoDataService.toggleTodoComplete(todo).subscribe((updatedTodo) => {
+      todo = updatedTodo;
+    });
   }
 
-  onRemoveTodo(todo: Todo) {
-    this.todoDataService.deleteTodoById(todo.id);
+  onRemoveTodo(todo: Todo): void {
+    this.todos = this.todos.filter((t) => t !== todo);
+    this.todoDataService.deleteTodo(todo).subscribe();
   }
 
-  get todos() {
-    return this.todoDataService.getAllTodos();
+  getTodos() {
+    return this.todoDataService
+      .getAllTodos()
+      .subscribe((todos) => (this.todos = todos));
   }
 }

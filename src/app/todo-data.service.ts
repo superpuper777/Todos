@@ -1,36 +1,61 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
+
 import { Todo } from './todo';
-import { TODOS } from './mock-todos';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoDataService {
-  todos: Todo[] = TODOS;
+  todos: Todo[];
   public CompletedCount;
+  private todosUrl = 'api/todos';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
 
   // Simulate POST /todos
-  addTodo(todo: Todo): TodoDataService {
-    this.todos.unshift(todo);
-    return this;
+  addTodo(todo: Todo): Observable<Todo> {
+    return this.http
+      .post<Todo>(this.todosUrl, todo, this.httpOptions)
+      .pipe(catchError(this.handleError<Todo>('addTodo')));
   }
 
   // Simulate DELETE /todos/:id
-  deleteTodoById(id: number): TodoDataService {
-    this.todos = this.todos.filter((todo) => todo.id !== id);
-    return this;
+  deleteTodo(todo: Todo | number): Observable<Todo> {
+    const id = typeof todo === 'number' ? todo : todo.id;
+    const url = `${this.todosUrl}/${id}`;
+    return this.http
+      .delete<Todo>(url, this.httpOptions)
+      .pipe(catchError(this.handleError<Todo>('deleteTodoById')));
   }
 
   // Simulate PUT /todos/:id
-  updateTodo(todo: Todo): Todo {
-    return this.getTodoById(todo.id);
+  updateTodo(todo: Todo): Observable<any> {
+    return this.http
+      .put(this.todosUrl, todo, this.httpOptions)
+      .pipe(catchError(this.handleError<any>('updateTodo')));
   }
 
   // Simulate GET /todos
-  getAllTodos(): Todo[] {
-    return this.todos;
+  getAllTodos(): Observable<Todo[]> {
+    return this.http
+      .get<Todo[]>(this.todosUrl)
+      .pipe(catchError(this.handleError<Todo[]>('getAllTodos', [])));
   }
 
   getAllCompleteTodos(): number {
@@ -38,9 +63,13 @@ export class TodoDataService {
       .length;
     return CompletedCount;
   }
+
   // Simulate GET /todos/:id
-  getTodoById(id: number): Todo {
-    return this.todos.find((todo) => todo.id === id);
+  getTodoById(id: number): Observable<Todo> {
+    const url = `${this.todosUrl}/${id}`;
+    return this.http
+      .get<Todo>(url)
+      .pipe(catchError(this.handleError<Todo>(`getTodoById id=${id}`)));
   }
 
   // Toggle todo complete

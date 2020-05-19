@@ -3,7 +3,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TodoDataService } from '../todo-data.service';
 
 import { Todo } from '../todo';
-import { TODOS } from './../mock-todos';
 
 @Component({
   selector: 'app-todo-counter',
@@ -12,7 +11,7 @@ import { TODOS } from './../mock-todos';
 })
 export class TodoCounterComponent implements OnInit {
   count: number = 0;
-  @Input() todos: Todo[] = TODOS;
+  @Input() todos: Todo[];
 
   constructor(private todoDataService: TodoDataService) {}
 

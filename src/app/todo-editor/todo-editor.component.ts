@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { Todo } from './../todo';
 
 @Component({
@@ -18,6 +19,6 @@ export class TodoEditorComponent implements OnInit {
 
   editTodo() {
     this.edit.emit(new Todo(this.title));
-    this.todo.title = '';
+    // this.todo.title = '';
   }
 }
