@@ -8,7 +8,8 @@ import { Todo } from './../todo';
   styleUrls: ['./todo-editor.component.css'],
 })
 export class TodoEditorComponent implements OnInit {
-  title: string = '';
+  @Input() title: string;
+
   @Input() todo: Todo;
 
   @Output() edit: EventEmitter<Todo> = new EventEmitter();
@@ -19,6 +20,6 @@ export class TodoEditorComponent implements OnInit {
 
   editTodo() {
     this.edit.emit(new Todo(this.title));
-    // this.todo.title = '';
+    this.title = '';
   }
 }

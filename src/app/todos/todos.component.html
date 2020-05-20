@@ -1,4 +1,4 @@
-<div class="main" *ngIf="todos.length > 0">
+<div class="main" *ngIf="todos && todos.length > 0">
   <ul class="todo-list">
     <li *ngFor="let todo of todos" [class.completed]="todo.complete"  [class.selected]="todo === selectedTodo" (click)=onSelect(todo)>
       <div class="view">
@@ -8,7 +8,7 @@
       </div>
     </li>
     <div *ngIf="selectedTodo">
-      <app-todo-editor [todo]="selectedTodo" (edit)=onEditTodo($event)></app-todo-editor>
+      <app-todo-editor [title]="selectedTodo.title" (edit)=onEditTodo($event)></app-todo-editor>
     </div>
   </ul>
 </div>
