@@ -58,10 +58,13 @@ export class TodoDataService {
       .pipe(catchError(this.handleError<Todo[]>('getAllTodos', [])));
   }
 
-  getAllCompleteTodos(): number {
-    let CompletedCount = this.todos.filter((todo) => todo.complete === false)
-      .length;
-    return CompletedCount;
+  getAllCompleteTodos(): Observable<Todo[]> {
+    return this.http
+      .get<Todo[]>(this.todosUrl)
+      .pipe(catchError(this.handleError<Todo[]>('getAllTodos', [])));
+    // let CompletedCount = this.todos.filter((todo) => todo.complete === false)
+    //   .length;
+    // return CompletedCount;
   }
 
   // Simulate GET /todos/:id
