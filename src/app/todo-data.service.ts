@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { MessageService } from './message.service';
 
 import { Todo } from './todo';
 
@@ -13,12 +14,20 @@ export class TodoDataService {
   public CompletedCount;
   private todosUrl = 'api/todos';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private messageService: MessageService,
+    private http: HttpClient
+  ) {}
+
+  private log(message: string) {
+    this.messageService.add(`TodoDataService: ${message}`);
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
+      this.log(`${operation} failed: ${error.message}`);
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
@@ -30,41 +39,36 @@ export class TodoDataService {
 
   // Simulate POST /todos
   addTodo(todo: Todo): Observable<Todo> {
-    return this.http
-      .post<Todo>(this.todosUrl, todo, this.httpOptions)
-      .pipe(catchError(this.handleError<Todo>('addTodo')));
+    return this.http.post<Todo>(this.todosUrl, todo, this.httpOptions).pipe(
+      tap((newTodo: Todo) => this.log(`added todo with id=${newTodo.id}`)),
+      catchError(this.handleError<Todo>('addTodo'))
+    );
   }
 
   // Simulate DELETE /todos/:id
   deleteTodo(todo: Todo | number): Observable<Todo> {
     const id = typeof todo === 'number' ? todo : todo.id;
     const url = `${this.todosUrl}/${id}`;
-    return this.http
-      .delete<Todo>(url, this.httpOptions)
-      .pipe(catchError(this.handleError<Todo>('deleteTodoById')));
+    return this.http.delete<Todo>(url, this.httpOptions).pipe(
+      tap((_) => this.log(`deleted todo id=${id}`)),
+      catchError(this.handleError<Todo>('deleteTodoById'))
+    );
   }
 
   // Simulate PUT /todos/:id
   updateTodo(todo: Todo): Observable<any> {
-    return this.http
-      .put(this.todosUrl, todo, this.httpOptions)
-      .pipe(catchError(this.handleError<any>('updateTodo')));
+    return this.http.put(this.todosUrl, todo, this.httpOptions).pipe(
+      tap((_) => this.log(`updated todo id=${todo.id}`)),
+      catchError(this.handleError<any>('updateTodo'))
+    );
   }
 
   // Simulate GET /todos
   getAllTodos(): Observable<Todo[]> {
-    return this.http
-      .get<Todo[]>(this.todosUrl)
-      .pipe(catchError(this.handleError<Todo[]>('getAllTodos', [])));
-  }
-
-  getAllCompleteTodos(): Observable<Todo[]> {
-    return this.http
-      .get<Todo[]>(this.todosUrl)
-      .pipe(catchError(this.handleError<Todo[]>('getAllTodos', [])));
-    // let CompletedCount = this.todos.filter((todo) => todo.complete === false)
-    //   .length;
-    // return CompletedCount;
+    return this.http.get<Todo[]>(this.todosUrl).pipe(
+      tap((_) => this.log('fetched todoos')),
+      catchError(this.handleError<Todo[]>('getAllTodos', []))
+    );
   }
 
   // Simulate GET /todos/:id

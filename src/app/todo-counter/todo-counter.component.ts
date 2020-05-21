@@ -20,8 +20,6 @@ export class TodoCounterComponent implements OnInit {
   }
 
   get() {
-    // this.count = this.todoDataService.getAllCompleteTodos();
-    // return this.count;
     return this.todoDataService
       .getAllTodos()
       .subscribe(

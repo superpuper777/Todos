@@ -12,6 +12,7 @@ import { TodoNewComponent } from './todo-new/todo-new.component';
 import { TodosComponent } from './todos/todos.component';
 import { TodoCounterComponent } from './todo-counter/todo-counter.component';
 import { TodoEditorComponent } from './todo-editor/todo-editor.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TodoEditorComponent } from './todo-editor/todo-editor.component';
     TodosComponent,
     TodoCounterComponent,
     TodoEditorComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TodoDataService } from './../todo-data.service';
-import { Location } from '@angular/common';
 
 import { Todo } from './../todo';
 
@@ -16,10 +15,7 @@ export class TodosComponent implements OnInit {
   @Output() remove: EventEmitter<Todo> = new EventEmitter();
 
   @Output() toggleComplete: EventEmitter<Todo> = new EventEmitter();
-  constructor(
-    private todoDataService: TodoDataService,
-    private location: Location
-  ) {}
+  constructor(private todoDataService: TodoDataService) {}
 
   ngOnInit(): void {}
 
