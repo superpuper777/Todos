@@ -8,7 +8,7 @@
       </div>
     </li>
     <div *ngIf="selectedTodo">
-      <app-todo-editor [title]="selectedTodo.title" (edit)=onEditTodo($event)></app-todo-editor>
+      <app-todo-editor [title]="selectedTodo.title" [selectedTodo]="selectedTodo" (edit)=onEditTodo($event)></app-todo-editor>
     </div>
   </ul>
 </div>

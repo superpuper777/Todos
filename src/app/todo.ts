@@ -5,6 +5,6 @@ export class Todo {
 
   constructor(title: string) {
     this.title = title;
-    this.id = Math.floor(Math.random() * 100);
+    // this.id = Math.floor(Math.random() * 100);
   }
 }

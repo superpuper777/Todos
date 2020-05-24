@@ -58,7 +58,11 @@ export class TodoDataService {
   // Simulate PUT /todos/:id
   updateTodo(todo: Todo): Observable<any> {
     return this.http.put(this.todosUrl, todo, this.httpOptions).pipe(
-      tap((_) => this.log(`updated todo id=${todo.id}`)),
+      tap((_) =>
+        this.log(
+          `updated todo id=${todo.id} title=${todo.title} complete=${todo.complete}`
+        )
+      ),
       catchError(this.handleError<any>('updateTodo'))
     );
   }
@@ -81,6 +85,7 @@ export class TodoDataService {
 
   // Toggle todo complete
   toggleTodoComplete(todo: Todo) {
+    todo.complete = !todo.complete;
     return this.updateTodo(todo);
   }
 }

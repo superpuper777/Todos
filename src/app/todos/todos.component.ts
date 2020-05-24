@@ -25,6 +25,7 @@ export class TodosComponent implements OnInit {
 
   onEditTodo(todo: Todo): void {
     this.todoDataService.updateTodo(todo).subscribe();
+    // console.log(todo);
   }
 
   onToggleTodoComplete(todo: Todo): void {

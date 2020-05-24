@@ -10,7 +10,7 @@ import { Todo } from './../todo';
 export class TodoEditorComponent implements OnInit {
   @Input() title: string;
 
-  @Input() todo: Todo;
+  @Input() selectedTodo: Todo;
 
   @Output() edit: EventEmitter<Todo> = new EventEmitter();
 
@@ -19,7 +19,8 @@ export class TodoEditorComponent implements OnInit {
   ngOnInit(): void {}
 
   editTodo() {
-    this.edit.emit(new Todo(this.title));
+    this.selectedTodo.title = this.title;
     this.title = '';
+    this.edit.emit(this.selectedTodo);
   }
 }
